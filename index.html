@@ -1,0 +1,344 @@
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedro Luckeroth</title>
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <!-- jQuery -->
+
+    <script>
+
+        (function ($) {
+
+            // Pega API e lista produtos
+            $.getJSON('https://diwserver.vps.webdock.cloud/products', function (data) {
+
+                data.products.forEach(element => {
+
+                    $('#products').append(`
+                    <li class="product-card-body">
+                        <a href="detalhes.html?id=`+ element.id + `">
+            
+                        <div class="product-card-img">
+                            <img class="product-card-img2" src="`+ element.image + `" alt="">
+                        </div>
+
+                        <div class="product-card-info">
+                            <span class="product-card-name">
+                                `+ element.title + `
+                            </span>
+
+                            <span class="product-card-price">
+                                R$: `+ element.price + `
+                            </span>
+
+                            <span class="product-card-category">
+                                `+ element.articleType + `
+                            </span>
+                        </div>
+
+                        </a>
+                    </li>
+                `);
+                });
+
+            });
+
+            // Pega todas as Categorias e as lista dentro do <select>
+            $.getJSON('https://diwserver.vps.webdock.cloud/products/categories', function (data) {
+
+
+                $('#cat').append(`
+                <option value="null">Selecione</option>
+                    `);
+                data.forEach(element => {
+                    $('#cat').append(`
+                    <option value="`+ element + `">` + element + `</option>
+                    `);
+                });
+
+            });
+
+
+
+        })(jQuery);
+    </script>
+
+</head>
+
+<body id="main">
+
+
+    <!-- HEADER -->
+    <div id="header">
+        <div id="logo">
+            <a href="index.html">
+                <img id="logo-img" src="assets/logo.png" alt="">
+            </a>
+        </div>
+        <div id="search-bar">
+            <span id="greetings">Mundo das Chuteiras</span>
+            <span id="aluno">Pedro Luckeroth [NOME COMPLETO] - [NÚMERO DE MATRÍCULA]</span>
+        </div>
+    </div>
+    <!-- HEADER -->
+
+    <!-- CONTENT -->
+    <div id="content">
+
+        <!-- PESQUISA E SLIDER -->
+        <div id="product-show">
+            <div id="product-finder">
+                <span id="finder-text-1">Pesquisa rápida - Encontre seu produto</span>
+                <span id="finder-text-2">Filtre as opções para o produto ideal</span>
+
+                <!-- FORM NOME PRODUTO -->
+                <form id="myFormName">
+                    <input id="myName" name="name" placeholder="Produto" />
+                    <input id="product-finder-btn" type="submit" value="Buscar" />
+
+                </form>
+
+
+
+            </div>
+            <div class="carousel-container">
+                <div class="carousel-slide">
+                    <img class="carousel-img" src="assets\chuteraamarela.png" alt="Imagem 1">
+                    <img class="carousel-img" src="assets\chuterbaaremala2.png" alt="Imagem 2">
+                    <img class="carousel-img" src="assets\chutebaaremla3.png" alt="Imagem 3">
+                    <img class="carousel-img" src="assets\chutebaaremala4.png" alt="Imagem 4">
+                </div>
+                <button class="carousel-prev">&#8249;</button>
+                <button class="carousel-next">&#8250;</button>
+            </div>
+
+
+        </div>
+        <!-- PESQUISA E SLIDER -->
+
+        <!-- CATALOGO PRODUTOS -->
+        <div id="product-catalog">
+
+            <!-- FORM CATEGORIA PRODUTOS -->
+            <form id="myFormCat">
+                <label for="cat">Categoria do produto:</label>
+                <select id="cat" name="categorias">
+
+                </select>
+            </form>
+
+            <div id="main-catalog">
+                <ul id="products">
+
+
+                </ul>
+            </div>
+        </div>
+        <!-- CATALOGO PRODUTOS -->
+
+    </div>
+    <!-- CONTENT -->
+
+
+    <!-- FOOTER -->
+    <div id="footer">
+        <div id="payment" class="footer_elements">
+            <span id="payment-text">Metodos de pagamento</span>
+            <img class="payment-img" src="./assets/american.png" alt="">
+            <img class="payment-img" src="./assets/elo.png" alt="">
+            <img class="payment-img" src="./assets/visa.png" alt="">
+        </div>
+        <div id="links" class="footer_elements">
+            <span id="links-text">Links Rápidos</span>
+            <a href="https://support.google.com/sites/?hl=pt#topic=7184580">Ajuda</a>
+            <a href="https://policies.google.com/faq?hl=en-US">FAQ</a>
+            <a href="https://policies.google.com/privacy?hl=pt-BR">Politica de privacidade</a>
+
+        </div>
+        <div id="social" class="footer_elements">
+            <span id="social-text">Redes Sociais</span>
+            <div class="social-imgs">
+                <a href="https://www.facebook.com/pedroluckeroth"><img src="./assets/facebook.png"
+                        class="media-object  img-responsive img-thumbnail"></a>
+                </a>
+                <a href="https://www.instagram.com/pedroluckeroth/"><img src="./assets/instagram.png"
+                        class="media-object  img-responsive img-thumbnail"></a>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- FOOTER -->
+
+</body>
+
+
+<script>
+    const carouselSlide = document.querySelector('.carousel-slide');
+    const carouselImages = document.querySelectorAll('.carousel-slide img');
+    const prevButton = document.querySelector('.carousel-prev');
+    const nextButton = document.querySelector('.carousel-next');
+    let counter = 1;
+    const size = carouselImages[0].clientWidth;
+
+    carouselSlide.style.transform = `translateX(${-size * counter}px)`;
+
+    nextButton.addEventListener('click', () => {
+        if (counter >= carouselImages.length - 1) return;
+        carouselSlide.style.transition = "transform 0.5s ease";
+        counter++;
+        carouselSlide.style.transform = `translateX(${-size * counter}px)`;
+    });
+
+    prevButton.addEventListener('click', () => {
+        if (counter <= 0) return;
+        carouselSlide.style.transition = "transform 0.5s ease";
+        counter--;
+        carouselSlide.style.transform = `translateX(${-size * counter}px)`;
+    });
+
+    carouselSlide.addEventListener('transitionend', () => {
+        if (carouselImages[counter].id === 'last-clone') {
+            carouselSlide.style.transition = "none";
+            counter = carouselImages.length - 2;
+            carouselSlide.style.transform = `translateX(${-size * counter}px)`;
+        }
+        if (carouselImages[counter].id === 'first-clone') {
+            carouselSlide.style.transition = "none";
+            counter = carouselImages.length - counter;
+            carouselSlide.style.transform = `translateX(${-size * counter}px)`;
+        }
+    });
+
+
+</script>
+
+<script>
+    (function ($) {
+
+
+
+
+
+        // Pega o form
+        const form = document.getElementById("myFormName");
+
+        // 'submit' event handler
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();
+
+
+            // Pesquisa o nome do produto
+            $.getJSON('https://diwserver.vps.webdock.cloud/products/search?query=' + sendData().name, function (data) {
+
+                $('#products').html(``);
+                data.forEach(element => {
+
+                    $('#products').append(`
+                        <li class="product-card-body">
+                            <a href="detalhes.html?id=`+ element.id + `">
+
+                            <div class="product-card-img">
+                                <img class="product-card-img2" src="`+ element.image + `" alt="">
+                            </div>
+
+                            <div class="product-card-info">
+                                <span class="product-card-name">
+                                    `+ element.title + `
+                                </span>
+
+                                <span class="product-card-price">
+                                    R$: `+ element.price + `,00
+                                </span>
+
+                                <span class="product-card-category">
+                                    `+ element.articleType + `
+                                </span>
+                            </div>
+
+                            </a>
+                        </li>
+                    `);
+                });
+
+            });
+
+        });
+
+
+        // Retorna o objeto com inputs do form
+        function sendData() {
+            const XHR = new XMLHttpRequest();
+
+            const FD = new FormData(form);
+
+            var inputs;
+            inputs = Object.fromEntries(FD);
+
+            return inputs;
+        }
+
+
+        // Ao escolher uma opção do <select>
+        $("#cat").on("change", function () {
+
+            selecionaCategoria();
+
+            $('#cat').blur();
+        });
+
+
+
+        function selecionaCategoria() {
+            var conceptName = $('#myFormCat').find(":selected").val();
+            
+            // Pesquisa Categorias e lista os produtos da categoria
+            var categoryProduct = conceptName;
+
+            $.getJSON('https://diwserver.vps.webdock.cloud/products/category/' + categoryProduct, function (data) {
+                $('#products').html(``);
+                data.products.forEach(element => {
+
+                    $('#products').append(`
+                        <li class="product-card-body">
+                            <a href="detalhes.html?id=`+ element.id + `">
+
+                            <div class="product-card-img">
+                                <img class="product-card-img2" src="`+ element.image + `" alt="">
+                            </div>
+
+                            <div class="product-card-info">
+                                <span class="product-card-name">
+                                    `+ element.title + `
+                                </span>
+
+                                <span class="product-card-price">
+                                    R$: `+ element.price + `,00
+                                </span>
+
+                                <span class="product-card-category">
+                                    `+ element.articleType + `
+                                </span>
+                            </div>
+
+                            </a>
+                        </li>
+                    `);
+                });
+            });
+        }
+
+
+    })(jQuery);
+</script>
+
+
+</html>

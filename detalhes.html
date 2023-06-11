@@ -1,0 +1,126 @@
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedro Luckeroth</title>
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <!-- jQuery -->
+
+    <script>
+        (function ($) {
+
+
+
+            // Pega ID da URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const id = urlParams.get('id');
+
+
+            // Lista o produto com o seu ID
+            $.getJSON('https://diwserver.vps.webdock.cloud/products/' + id, function (element) {
+
+
+                $('#product').append(`
+
+                <div id="product-img">
+                <img src="`+ element.image + `" alt="` + element.title + `">
+                </div>
+
+                <div id="product-info">
+                    <ul>
+                        <li class="title"><h1>`+ element.title + `</h1></li>
+                        <li class="desc">`+ element.description + `</li>
+                        <li class="price"><h3>R$: `+ element.price + `,00</h3></li>
+                        <li class="category">`+ element.articleType + `</li>
+                        <li class="number"><h2>Telefone: 3228-2000</h2></li>
+                    </ul>
+                </div>
+            `);
+
+            });
+
+        })(jQuery);
+    </script>
+
+</head>
+
+<body id="main" class="detalhes">
+
+
+    <!-- HEADER -->
+    <div id="header">
+        <div id="logo">
+            <a href="index.html">
+                <img id="logo-img" src="assets/logo.png" alt="">
+            </a>
+        </div>
+        <div id="search-bar">
+            <span id="greetings">Mundo das Chuteiras</span>
+            <span id="aluno">Pedro Luckeroth [NOME COMPLETO] - [NÚMERO DE MATRÍCULA]</span>
+        </div>
+    </div>
+    <!-- HEADER -->
+
+    <!-- CONTENT -->
+    <div id="content">
+
+
+
+        <!-- CATALOGO PRODUTOS -->
+        <div id="product">
+
+        </div>
+        <!-- CATALOGO PRODUTOS -->
+
+    </div>
+    <!-- CONTENT -->
+
+
+    <!-- FOOTER -->
+    <div id="footer">
+        <div id="payment" class="footer_elements">
+            <span id="payment-text">Metodos de pagamento</span>
+            <img class="payment-img" src="./assets/american.png" alt="">
+            <img class="payment-img" src="./assets/elo.png" alt="">
+            <img class="payment-img" src="./assets/visa.png" alt="">
+        </div>
+        <div id="links" class="footer_elements">
+            <span id="links-text">Links Rápidos</span>
+            <a href="https://support.google.com/sites/?hl=pt#topic=7184580">Ajuda</a>
+            <a href="https://policies.google.com/faq?hl=en-US">FAQ</a>
+            <a href="https://policies.google.com/privacy?hl=pt-BR">Politica de privacidade</a>
+
+        </div>
+        <div id="social" class="footer_elements">
+            <span id="social-text">Redes Sociais</span>
+            <div class="social-imgs">
+                <a href="https://www.facebook.com/pedroluckeroth"><img src="./assets/facebook.png"
+                        class="media-object  img-responsive img-thumbnail"></a>
+                </a>
+                <a href="https://www.instagram.com/pedroluckeroth/"><img src="./assets/instagram.png"
+                        class="media-object  img-responsive img-thumbnail"></a>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- FOOTER -->
+
+</body>
+
+
+<script>
+
+
+</script>
+
+
+
+</html>
